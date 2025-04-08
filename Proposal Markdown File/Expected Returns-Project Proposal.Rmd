@@ -1,0 +1,347 @@
+---
+title: "Proposal for Expected Return Project – GSOC 2025"
+author: "Mariam Iftikhar"
+date: ""
+output: 
+  pdf_document: 
+    toc: true
+header-includes:
+  - \usepackage{graphicx}  # For image inclusion
+  - \usepackage{times}     # For Times New Roman font
+  - \usepackage{titling}   # For title formatting
+  - \usepackage{sectsty}   # Allows customization of section titles
+  - \pretitle{\begin{center}\vspace{-2cm}\includegraphics[width=6cm]{C:/Users/maria/Downloads/GSoC-Vertical.png}\par\huge\bfseries}
+  - \posttitle{\end{center}}
+  - \preauthor{\begin{center}\LARGE\bfseries}  # Slightly larger font for author
+  - \postauthor{\end{center}}
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+library(pander)
+library(kableExtra)
+library(remotes)
+```
+
+\newpage
+
+# Project information
+
+* Project title: Expected Returns Factor Formation Project
+
+* Organization: R Project for Statistical Computing
+
+* URL of Project: https://github.com/rstats-gsoc/gsoc2025/wiki/Expected-Returns%3A-Factor-Formation
+
+* Overview of the Project:
+
+This project is built on the solid groundwork laid out in "Expected Returns: An Investor’s Guide to Harvesting Market Rewards" by Antti Ilmanen. While earlier efforts have concentrated on understanding the pitfalls of diversification and creating strategies for a more robust portfolio, this proposal seeks to adopt a more systematic and scalable method by enhancing the ExpectedReturns R package.
+
+The main goal here is to create and implement reusable R functions for constructing financial factors—essentially connecting financial theory with practical data science. We’ll draw on insights from key research (like that of Chen, Zimmermann, and Kelly) to develop predictive factors that are based on macroeconomic indicators, valuation ratios, momentum, and other well-established anomalies. These functions will be designed with clarity, thorough documentation, and modularity in mind, providing the research community with a dependable toolkit for empirical asset pricing and return forecasting.
+
+By merging solid econometric practices with contemporary R development workflows (including unit testing, documentation, and package installation), this project aims to facilitate reproducible financial research and enable researchers to delve into factor-based investing strategies with greater ease and transparency.
+
+# Bio of Contributor
+
+I am a graduate student pursuing MS in Business Analytics at Roosevelt University, Chicago, while also working as a Graduate Assistant for the Heller College of Business for almost a year.
+
+Having a degree in Financial Engineering provides me a strong foundation in quantitative finance, and financial modelling along with real-world experience has sharpened my analytical and technical skills, that are crucial for this project. 
+
+I started my professional journey as an intern and later transitioned into a full-time Business Intelligence Analyst at a Canada-based analytics and consulting company. Over the two and a half years, I created more than 25 Power BI reports and utilized various other technologies for clients (locally and internationally) across various industries including FMCG, Healthcare, Financial Services, EdTech, and E-commerce. These projects not only helped identify business opportunities and risks but also assisted clients in cutting costs and making better decisions.This experience solidified my belief that "correct decisions taken at the right time can rule the entire world."  
+
+My educational background has been the backbone of my professional growth. During my master’s program, I’ve  broadened my technical expertise by diving into various technologies with a special focus on R—covering everything from coding and developing R packages to working with R Markdown and others like AWS, Tableau, Python, and version control. Along the way, I’ve completed a variety of assignments, and certifications that strengthen my qualifications for this project.
+
+Additionally, I've successfully completed evaluation task that showcase my abilities and ith my strong analytical skills, hands-on experience with R, and a proven track record of working with large datasets, I truly believe I'm a great fit for this project.
+
+\newpage
+
+# Contact Information
+
+* Contributor name: Mariam Iftikhar
+
+* Telephone(s): +1 (773) 410-7087
+
+* Email(s): mariamiftikhar127@gmail.com
+
+* Other communications channels: 
+
+  https://www.linkedin.com/in/mariamiftikhar/
+
+  mariamiftikhar97@gmail.com
+
+# Contributor affiliation
+
+* Institution: Roosevelt University
+
+* Program: Business Analytics
+
+* Stage of completion: Graduate
+
+* Contact to verify: Jane Wendorff-Craps (jwendorffcraps@roosevelt.edu)
+
+# Schedule Conflicts
+
+I'm dedicated to giving this project like a full-time job throughout the GSoC period. I don't expect any major conflicts, but I'll make sure to plan ahead just in case any small commitments come up.
+
+# Mentors
+
+Evaluating mentor name and email:  Justin.M Shea (justin.shea@gmail.com)
+
+Other Mentors:
+
+* Brian Peterson
+
+* Harry He
+
+* Erol Biceroglu
+
+* Bryan Rodriguez
+
+# Coding Plan and Methods
+
+
+## Tools and Technologies
+
+For this development, we’ll be using a few key tools:
+
+* **R**: This will be our main programming language for development.
+* **tinytest**: For unit testing the functions to make sure everything is accurate.
+* **roxygen2**: This tool will help us automate the documentation of our functions.
+* **tidyverse**: This is essential for data manipulation, and it includes handy packages like dplyr, tidyr, and ggplot2.
+
+## Naming Conventions
+
+We’ll stick to Bryan Kelly’s naming conventions for field names in our functions. This approach helps maintain consistency and aligns with the best practices in the financial research community.
+
+## Feature Engineering (ML Perspective)
+
+When it comes to finance, feature engineering will be all about transforming raw financial data—like what we get from any market data—into valuable signals or factors. This is similar to the feature engineering process in machine learning, where we take raw data and turn it into structured features that can be utilized in predictive models.
+
+
+
+**Describe in detail your plan for completing the work. What functions will be written, how and when will you do design, how will you verify the results of your coding?**
+
+## Project Execution Plan
+
+
+**1. Foundation & Environment Setup**
+
+
+*Timeline:* Weeks 1
+
+*Tasks:*
+
+* Dive into the structure, dependencies, and design patterns of the ExpectedReturns and FactorAnalytics packages to really grasp their architecture and how they can be extended.
+
+* Take a look at important academic works by Chen (2021), Zimmermann et al. (2020), and Kelly & Pruitt to establish a solid theoretical base in expected returns and factor modeling.
+
+* Get the development environment ready in R by using devtools, roxygen2, tinytest, and pkgdown, while managing version control through GitHub for seamless commits, pushes, and tracking issues.
+
+* Set up R development environment, making sure to include version control (Git + GitHub), linters, and roxygen2 for documentation purposes.
+
+* Ensure local installation and fix any build errors that pop up while setting up the ExpectedReturns and FactorAnalytics packages.
+
+
+**2. Core Development – Utility Functions & Initial Factors**
+
+
+*Timeline:* Weeks 2
+
+*Tasks:*
+
+* Create some essential utility functions like normalize_data(), clean_financial_data(), and align_time_series() to get that raw financial data ready for modeling.
+
+* Develop some preprocessing tools to tackle NA imputation, winsorization, frequency alignment, and outlier removal, all while using solid statistical techniques.
+
+* Start adding inline documentation for each utility function with roxygen2, including clear usage examples and descriptions of the parameters, ensuring field names follow Bryan Kelly's naming convention for clarity and consistency.
+
+* Finally, make sure to commit each utility function along with its tests to a GitHub development branch so that we can keep track of our versioning.
+
+\newpage
+
+**3. Focus on building and fine-tuning our core factor construction functions**
+
+*Timeline:* Weeks 3
+
+*Tasks:*
+
+* Start by implementing factor functions like construct_value_factor(), construct_size_factor(), and construct_momentum_factor() using established academic definitions and reliable datasets such as Compustat and 10-K filings.
+
+* Make sure to handle various financial data formats effectively, whether it's point-in-time fundamentals or market return time series.
+
+* Kick things off by writing some initial unit tests with the tinytest framework to check the input/output behavior and how well we handle edge cases.
+
+* Next, begin drafting documentation pages for these factor functions. This should include the theoretical background, mathematical formulas, and a step-by-step code walkthrough.
+
+
+**4. Modify factor construction process and integrate everything into the ExpectedReturns library**
+
+
+*Timeline:* Weeks 4
+
+*Tasks:*
+
+* Refine the internal logic of each factor function to boost efficiency, modularity, and make them easier to extend in the future.
+
+* Ensure that all functions fit seamlessly into the broader ExpectedReturns framework, adhering to its class system and return formats.
+
+* Expand the documentation with practical examples and link to academic references, like Fama-French and AQR methodologies, and standardize naming of all factor fields to align with Bryan Kelly’s naming convention.
+
+* Run sample tests using historical market and accounting data, and be ready to iterate based on feedback from the mentor.
+
+
+**5. Need to test and validate the factor construction pipeline**
+
+
+*Timeline:* Weeks 5
+
+*Tasks:*
+
+* First, I'll write comprehensive unit tests using tinytest. The goal here is to cover all the common use cases, boundary conditions, and integration points to ensure everything runs smoothly.
+
+* Next, I'll refactor and optimize our functions for better computational efficiency using vectorization along with data.table or dplyr to make sure our code is as efficient as possible.
+
+* Gather feedback on any edge cases and performance bottlenecks. Based on the results from our testing, necessary code improvements will be made.
+
+* Finally, test results will be pushed and code updates to GitHub, making sure to keep our changelogs and issue references clear in the commit messages.
+
+\newpage
+
+**6. Finalize factor construction and ensure reliability across various datasets**
+
+
+*Timeline:* Weeks 6
+
+*Tasks:*
+
+* Conduct regression testing and backtesting using benchmark factor models to confirm that our outputs align with theoretical expectations.
+
+* Finalize all core unit tests to ensure that no regressions have slipped in with the recent updates.
+
+* Enhance our documentation, making sure to clearly explain parameters, expected input structures, and how to visualize outputs (like time series plots of factors).
+
+* Lastly, add any additional helper functions or enhancements based on the valuable feedback received from mentors.
+
+
+**7. Wrap up the core development(R package) and get everything ready for submission.**
+
+
+*Timeline:* Weeks 7
+
+*Tasks:*
+
+* Conduct a comprehensive code audit to make sure that function names, argument conventions, and documentation align with CRAN and Tidyverse best practices.
+
+* Merge all functions, tests, and documentation into the main development branch (main) and set up the GitHub repository for review.
+
+* Share all work with the mentors for feedback and make any necessary final revisions.
+
+* Ensure that the project can be installed via GitHub using devtools::install_github() for public reproducibility.
+
+
+**8. Finalize and submit the completed project.**
+
+
+*Timeline:* Weeks 8
+
+*Tasks:*
+
+* Create in-depth vignettes using RMarkdown that illustrate how to create, test, and evaluate factor models from beginning to end for both the packages.
+
+* Produce a polished README.md and NEWS.md that include clear installation instructions, sample use cases, and guidelines for contributions.
+
+* Launch the documentation site using pkgdown to enhance accessibility and showcase the package’s features.
+
+* Submit the entire project archive to GSoC mentors, which should include the source code, documentation, test logs, and vignettes.
+
+\newpage
+
+# Timeline
+
+**Detailed timeline of how you plan to spend your summer.**
+
+``` {r echo=FALSE}
+timeline <- data.frame(
+  Week = c("Week 1 ", "Week 2 ", "Week 3 ", "Week 4 ", "Week 5 ", "Week 6 ", "Week 7 ", "Week 8 "),
+  TimeFrame = c("May 8 - May 14","May 15 - May 21","May 22 - May 28","May 29 - June 4","June 5 - June 11","June 12 - June 18","June 19 - June 25","June 26 - June 30"),
+  Objectives = c(
+    "Community Bonding Period and familiarize with the ExpectedReturns project framework.",
+    "Kick off the development of essential utilities and foundational functions for factor construction.",
+    "Concentrate on creating and fine-tuning those factor construction functions, making sure the data is properly aligned.",
+    "Take it a step further by enhancing the factor construction functions and integrating them with the ExpectedReturns library.",
+    "Start testing and validating these factor construction functions using the ExpectedReturns library to ensure everything works smoothly.","Wrap up the factor construction and testing phases, making sure the functions are robust and reliable.", "Take a moment to review everything and get ready for the final submission by finishing up any outstanding tasks.","Complete the project and submit everything, making sure all deliverables are included."),
+    Tasks = c("Dive into the project's current setup and libraries to get a good grasp on how everything integrates; take a look at key writings by Chen, Zimmermann, and Kelly to build a solid theoretical foundation; getting my development environment and tools ready for data processing.","Start by creating basic functions to normalize and align financial data; develop utilities to clean and preprocess financial time series; and kick off the documentation for core functions, complete with usage examples.","Keep building financial factors using data from 10K reports; make sure to support various types of financial data; and start testing and documenting functions with some initial unit tests.","Polish the factor construction logic to ensure it works well with different formats; enhance the documentation with practical examples and links to theory; test with sample datasets and incorporate feedback from the mentors.","Set up detailed unit tests using the tinytest package; tweak functions based on the results of those tests; and add any necessary features or improvements based on the feedback I'll receive.","Conduct thorough testing, including edge cases; run regression tests to make sure nothing breaks; finalize your unit tests and update the documentation as needed.","Wrap up final checks on all of the code, tests, and documentation; organize the documentation with clear naming conventions; and submit the work to mentors for their feedback and review.","Finish up all documentation to ensure it’s clear; create vignettes with test cases that showcase how to create and validate factors; and submit the entire project for final approval.")
+
+)
+
+kable(timeline, caption = "Eight Weeks Timeline.") %>%
+  column_spec(1,width = "6em") %>%
+  column_spec(2,width = "11em") %>%
+  column_spec(3,width = "8em") %>%
+  column_spec(4,width = "14em") %>%
+  row_spec(1:nrow(timeline), hline_after = TRUE, extra_latex_after ="\\rule{0pt}{15pt}")
+```
+
+\newpage
+
+# Management of Coding Project
+
+**How do you propose to ensure code is submitted / tested?**
+
+To keep the code quality and integrity intact throughout the project, I plan to follow this development workflow:
+
+* **Version Control and GitHub Integration**
+
+* Set up a dedicated GitHub repository (or fork from the ExpectedReturns/FactorAnalytics repos if I’m contributing directly).
+
+* All development will stick to a Git-based workflow, using feature branches (like feature/factor-construction, test/core-functions, etc.) to keep things organized and manageable.
+
+* Make regular commits—at least daily or after any significant changes—complete with clear messages that summarize updates, bug fixes, or test results.
+
+* Every week, I’ll push my changes to GitHub and create Pull Requests to get feedback and reviews from my mentors.
+
+* **Continuous Testing and Validation**
+
+* Utilize the tinytest R package for unit testing since it’s lightweight and fits well with package development.
+
+* Each new function or feature will come with one or more test cases to ensure input-output consistency, handle edge cases, and maintain accuracy.
+
+* After every major addition or modification, I’ll run a full test suite to make sure nothing breaks the existing functionality.
+
+* Conduct regression testing as new factors are developed or existing ones are improved, ensuring everything remains backward compatible and stable.
+
+* **Documentation and Code Quality**
+
+* All functions will feature roxygen2-style documentation, including input descriptions, examples, references, and expected output formats.
+
+* Regularly use devtools::check() to ensure the package meets CRAN-level checks (no warnings, errors, or notes).
+
+* Naming conventions and structure will follow Bryan Kelly’s standards for factor names and field identifiers, which will help with interpretability and reusability.
+
+* **Submission Schedule**
+
+* Submit code updates weekly through GitHub, focusing on transparency and traceability.
+
+* Completed vignettes and documentation will also be version-controlled and shared incrementally with the mentors for their review.
+
+\newpage
+
+# Test
+
+Before proceeding to the proposal, we first ensure that both the ExpectedReturns and FactorAnalytics packages are installed properly. This involves the following steps:
+
+* **Download and Build Locally:** Started by downloading the ExpectedReturns and FactorAnalytics packages so I can build them right in your R environment.
+
+* **Installation Check:** Installed both packages, and keep an eye out for any build errors or issues that might pop up during the installation.
+
+* **Error Troubleshooting:** Checked out if I run into any errors. This means looking for any missing dependencies, updating package versions, or tweaking the system environment settings.
+
+* **Successful Build:** After successfully installing the packages, checked by running some basic tests or examples from the package documentation to confirm everything is functioning as it should.
+
+## Package Installation
+
+![Expected Return Package Installation]("C:\Users\maria\Downloads\ExpectedReturnInstallation.png")
+
+
+![Factor Analytics Package Force Installation]("C:\Users\maria\Downloads\FactorAnalytics.png")
+![Factor Analytics Package Complete Installation]("C:\Users\maria\Downloads\FactorAnalyticsInstallation.png")
